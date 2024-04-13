@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renderer can load template 1`] = `
+"/* 
+    This file was generated with @shko.online/componentframework-mock-cli (pcf-sb)
+*/
+
+import type { Meta, StoryObj } from '@storybook/html';
+
+import type { IInputs, IOutputs } from '../Calendar/generated/ManifestTypes';
+
+import { useArgs, useEffect } from "@storybook/preview-api";
+
+import { ComponentFrameworkMockGeneratorReact, StringPropertyMock } from '@shko.online/componentframework-mock';
+
+import { Calendar as Component } from '../Calendar/index';
+ 
+import ReactDOM from 'react-dom';
+
+
+export const StoryArgs {
+  isDisabled: boolean;
+  isVisible: boolean;
+  Theme: string
+}
+
+const renderGenerator = () => {
+  let container: HTMLDivElement | null;
+  let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
+
+  return function () {
+    const [args] = useArgs<StoryArgs>();
+    // Fires on unload story
+    useEffect(
+      () => () => {
+        container = null;
+        mockGenerator.control.destroy();
+      },
+      []
+    );
+    // init logic: 
+    if (!container) {
+      container = document.createElement('div');
+      // initialize ComponentFramework Mock Generator
+      mockGenerator = new ComponentFrameworkMockGeneratorReact(
+        Component,
+        {
+            Theme: StringPropertyMock            
+        },
+        container,
+      );
+
+      // Initialize default state of the parameters
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context._SetCanvasItems({
+            Theme: args.Theme            
+      });
+
+      // Execute the component's init method      
+      mockGenerator.ExecuteInit();
+    }
+
+    // Update view
+    if (mockGenerator) {
+      // Update the component's parameters based on storybook's arguments
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.UpdateValues({
+            Theme: args.Theme            
+      });
+      
+      // Execute the component's updateView method 
+      ReactDOM.render(mockGenerator.ExecuteUpdateView(), container);     
+    }
+
+    // returning the rendered html component after this update
+    return container;
+  };
+};
+
+export default renderGenerator;
+"
+`;

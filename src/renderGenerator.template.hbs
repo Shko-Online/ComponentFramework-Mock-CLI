@@ -1,0 +1,96 @@
+/* 
+    This file was generated with @shko.online/componentframework-mock-cli (pcf-sb)
+*/
+
+import type { Meta, StoryObj } from '@storybook/html';
+
+import type { IInputs, IOutputs } from '{{data.ComponentFolder}}/generated/ManifestTypes';
+
+import { useArgs, useEffect } from "@storybook/preview-api";
+
+import { {{data.MockGenerator}}, {{GetPropertyMocks data.Inputs}} } from '@shko.online/componentframework-mock';
+
+import { {{data.Component}} as Component } from '{{data.ComponentFolder}}/{{data.ComponentIndex}}';
+ 
+{{#if (isVirtualComponent data.MockGenerator)}}
+import ReactDOM from 'react-dom';
+{{/if}}
+
+{{#each data.Styles}}
+    import from '{{data.ComponentFolder}}/{{this}}';
+{{/each}}
+
+export const StoryArgs {
+  isDisabled: boolean;
+  isVisible: boolean;
+{{#each data.Inputs}}
+  {{@key}}: {{ControlToType this}}
+{{/each}}
+}
+
+const renderGenerator = () => {
+  let container: HTMLDivElement | null;
+  let mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>;
+
+  return function () {
+    const [args] = useArgs<StoryArgs>();
+    // Fires on unload story
+    useEffect(
+      () => () => {
+        container = null;
+        mockGenerator.control.destroy();
+      },
+      []
+    );
+    // init logic: 
+    if (!container) {
+      container = document.createElement('div');
+      // initialize ComponentFramework Mock Generator
+      mockGenerator = new {{data.MockGenerator}}(
+        Component,
+        {
+          {{#each data.Inputs}}
+            {{@key}}: {{ControlToPropertyMock this}}            
+          {{/each}}
+        },
+        container,
+      );
+
+      // Initialize default state of the parameters
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context._SetCanvasItems({
+         {{#each data.Inputs}}
+            {{@key}}: args.{{@key}}            
+         {{/each}}
+      });
+
+      // Execute the component's init method      
+      mockGenerator.ExecuteInit();
+    }
+
+    // Update view
+    if (mockGenerator) {
+      // Update the component's parameters based on storybook's arguments
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.UpdateValues({
+         {{#each data.Inputs }}
+            {{@key}}: args.{{@key}}            
+         {{/each}}
+      });
+      
+      // Execute the component's updateView method 
+    {{#if (isVirtualComponent data.MockGenerator)}}
+      ReactDOM.render(mockGenerator.ExecuteUpdateView(), container);     
+    {{else}}
+      mockGenerator.ExecuteUpdateView();
+    {{/if}}
+    }
+
+    // returning the rendered html component after this update
+    return container;
+  };
+};
+
+export default renderGenerator;
