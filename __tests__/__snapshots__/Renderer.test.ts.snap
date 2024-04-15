@@ -38,21 +38,21 @@ export type StoryArgs = {
   ShowWeekNumbers: boolean;
   InputEvent: string;
   FirstDayOfWeek: "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
-}
+};
 
 const renderGenerator = (
   onInitialize?: (
-    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>, 
-    container: HTMLDivElement, 
-    args: StoryArgs, 
+    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void, 
+  ) => void,
   onUpdate?: (
-    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>, 
-    container: HTMLDivElement, 
-    args: StoryArgs, 
+    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void 
+  ) => void
 ) => {
   let container: HTMLDivElement | null;
   let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
@@ -190,21 +190,21 @@ export type StoryArgs = {
   dependentlookupfield: ComponentFramework.LookupValue;
   showRecordImage: "false" | "true";
   showOpenRecordButton: "false" | "true";
-}
+};
 
 const renderGenerator = (
   onInitialize?: (
-    mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>, 
-    container: HTMLDivElement, 
-    args: StoryArgs, 
+    mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void, 
+  ) => void,
   onUpdate?: (
-    mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>, 
-    container: HTMLDivElement, 
-    args: StoryArgs, 
+    mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void 
+  ) => void
 ) => {
   let container: HTMLDivElement | null;
   let mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>;

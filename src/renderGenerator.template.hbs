@@ -31,17 +31,17 @@ export type StoryArgs = {
 
 const renderGenerator = (
   onInitialize?: (
-    mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>, 
-    container: HTMLDivElement, 
-    args: StoryArgs, 
+    mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void, 
+  ) => void,
   onUpdate?: (
-    mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>, 
-    container: HTMLDivElement, 
-    args: StoryArgs, 
+    mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void 
+  ) => void
 ) => {
   let container: HTMLDivElement | null;
   let mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>;
