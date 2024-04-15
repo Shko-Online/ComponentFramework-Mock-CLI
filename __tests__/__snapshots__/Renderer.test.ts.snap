@@ -73,23 +73,26 @@ const renderGenerator = (
       mockGenerator = new ComponentFrameworkMockGeneratorReact(
         Component,
         {
-            Theme: StringPropertyMock            
-            BackgroundColor: StringPropertyMock            
-            Language: StringPropertyMock            
-            AccessibilityLabel: StringPropertyMock            
-            SelectedDateValue: DateTimePropertyMock            
-            MinDate: DateTimePropertyMock            
-            MaxDate: DateTimePropertyMock            
-            ShowGoToToday: TwoOptionsPropertyMock            
-            MonthPickerVisible: TwoOptionsPropertyMock            
-            DayPickerVisible: TwoOptionsPropertyMock            
-            HighlightSelectedMonth: TwoOptionsPropertyMock            
-            HighlightCurrentMonth: TwoOptionsPropertyMock            
-            ShowSixWeeksByDefault: TwoOptionsPropertyMock            
-            ShowWeekNumbers: TwoOptionsPropertyMock            
-            InputEvent: StringPropertyMock            
-            FirstDayOfWeek: EnumPropertyMock            
+            Theme: StringPropertyMock,            
+            BackgroundColor: StringPropertyMock,            
+            Language: StringPropertyMock,            
+            AccessibilityLabel: StringPropertyMock,            
+            SelectedDateValue: DateTimePropertyMock,            
+            MinDate: DateTimePropertyMock,            
+            MaxDate: DateTimePropertyMock,            
+            ShowGoToToday: TwoOptionsPropertyMock,            
+            MonthPickerVisible: TwoOptionsPropertyMock,            
+            DayPickerVisible: TwoOptionsPropertyMock,            
+            HighlightSelectedMonth: TwoOptionsPropertyMock,            
+            HighlightCurrentMonth: TwoOptionsPropertyMock,            
+            ShowSixWeeksByDefault: TwoOptionsPropertyMock,            
+            ShowWeekNumbers: TwoOptionsPropertyMock,            
+            InputEvent: StringPropertyMock,            
+            FirstDayOfWeek: EnumPropertyMock,            
         },
+        {
+           SelectedDateValue: 'Date'   
+        }
       );
 
       onInitialize?.(mockGenerator, container, args, updateArgs);

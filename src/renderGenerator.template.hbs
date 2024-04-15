@@ -63,13 +63,18 @@ const renderGenerator = (
         Component,
         {
           {{#each data.Inputs}}
-            {{this.name}}: {{ControlToPropertyMock this}}            
+            {{this.name}}: {{ControlToPropertyMock this}},            
           {{/each}}
         },
         {{#if (isVirtualComponent data.MockGenerator)}}
         {{else}}
         container,
         {{/if}}
+        {
+          {{#each (GetOutputProperties data.Inputs)}}
+           {{this.name}}: '{{this.type}}'   
+          {{/each}}
+        }
       );
 
       onInitialize?.(mockGenerator, container, args, updateArgs);
