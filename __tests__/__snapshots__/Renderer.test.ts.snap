@@ -19,7 +19,7 @@ import { Calendar as Component } from '../Calendar/index';
 import ReactDOM from 'react-dom';
 
 
-export type StoryArgs {
+export type StoryArgs = {
   isDisabled: boolean;
   isVisible: boolean;
   Theme: string;
@@ -37,22 +37,23 @@ export type StoryArgs {
   ShowSixWeeksByDefault: boolean;
   ShowWeekNumbers: boolean;
   InputEvent: string;
-  FirstDayOfWeek: Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday;
+  FirstDayOfWeek: "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
 }
 
 const renderGenerator = (
   onInitialize?: (
     mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>, 
-    container, 
+    container: HTMLDivElement, 
     args: StoryArgs, 
     updateArgs: (newArgs: Partial<StoryArgs>) => void
   ) => void, 
   onUpdate?: (
     mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>, 
-    container, 
+    container: HTMLDivElement, 
     args: StoryArgs, 
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void {
+  ) => void 
+) => {
   let container: HTMLDivElement | null;
   let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
 
@@ -91,7 +92,7 @@ const renderGenerator = (
             FirstDayOfWeek: EnumPropertyMock,            
         },
         {
-           SelectedDateValue: 'Date'   
+           SelectedDateValue: 'Date', 
         }
       );
 
@@ -151,6 +152,130 @@ const renderGenerator = (
       
       // Execute the component's updateView method 
       ReactDOM.render(mockGenerator.ExecuteUpdateView(), container);     
+    }
+
+    // returning the rendered html component after this update
+    return container;
+  };
+};
+
+export default renderGenerator;
+"
+`;
+
+exports[`Renderer can load template Standard 1`] = `
+"/* 
+    This file was generated with @shko.online/componentframework-mock-cli (pcf-sb)
+    Do not manually update this file as it gets overwritten by pcf-sb based on the Manifest configuration.
+*/
+
+import type { Meta, StoryObj } from '@storybook/html';
+
+import type { IInputs, IOutputs } from '../LookupDropdown/generated/ManifestTypes';
+
+import { useArgs, useEffect } from "@storybook/preview-api";
+
+import { ComponentFrameworkMockGenerator, LookupPropertyMock, StringPropertyMock, EnumPropertyMock } from '@shko.online/componentframework-mock';
+
+import { LookupDropdown as Component } from '../LookupDropdown/index';
+ 
+
+
+export type StoryArgs = {
+  isDisabled: boolean;
+  isVisible: boolean;
+  lookupfield: ComponentFramework.LookupValue;
+  customtext: string;
+  customselecttext: string;
+  dependentlookupfield: ComponentFramework.LookupValue;
+  showRecordImage: "false" | "true";
+  showOpenRecordButton: "false" | "true";
+}
+
+const renderGenerator = (
+  onInitialize?: (
+    mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>, 
+    container: HTMLDivElement, 
+    args: StoryArgs, 
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void, 
+  onUpdate?: (
+    mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>, 
+    container: HTMLDivElement, 
+    args: StoryArgs, 
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void 
+) => {
+  let container: HTMLDivElement | null;
+  let mockGenerator: ComponentFrameworkMockGenerator<IInputs, IOutputs>;
+
+  return function () {
+    const [args, updateArgs] = useArgs<StoryArgs>();
+    // Fires on unload story
+    useEffect(
+      () => () => {
+        container = null;
+        mockGenerator.control.destroy();
+      },
+      []
+    );
+    // init logic: 
+    if (!container) {
+      container = document.createElement('div');
+      // initialize ComponentFramework Mock Generator
+      mockGenerator = new ComponentFrameworkMockGenerator(
+        Component,
+        {
+            lookupfield: LookupPropertyMock,            
+            customtext: StringPropertyMock,            
+            customselecttext: StringPropertyMock,            
+            dependentlookupfield: LookupPropertyMock,            
+            showRecordImage: EnumPropertyMock,            
+            showOpenRecordButton: EnumPropertyMock,            
+        },
+        container,
+        {
+           lookupfield: 'Lookup', 
+           dependentlookupfield: 'Lookup', 
+        }
+      );
+
+      onInitialize?.(mockGenerator, container, args, updateArgs);
+
+      // Initialize default state of the parameters
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context._SetCanvasItems({
+            lookupfield: args.lookupfield,           
+            customtext: args.customtext,           
+            customselecttext: args.customselecttext,           
+            dependentlookupfield: args.dependentlookupfield,           
+            showRecordImage: args.showRecordImage,           
+            showOpenRecordButton: args.showOpenRecordButton,           
+      });
+
+      // Execute the component's init method      
+      mockGenerator.ExecuteInit();
+    }
+
+    // Update view
+    if (mockGenerator) {
+      onUpdate?.(mockGenerator, container, args, updateArgs);
+
+      // Update the component's parameters based on storybook's arguments
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.UpdateValues({
+            lookupfield: args.lookupfield,       
+            customtext: args.customtext,       
+            customselecttext: args.customselecttext,       
+            dependentlookupfield: args.dependentlookupfield,       
+            showRecordImage: args.showRecordImage,       
+            showOpenRecordButton: args.showOpenRecordButton,       
+      });
+      
+      // Execute the component's updateView method 
+      mockGenerator.ExecuteUpdateView();
     }
 
     // returning the rendered html component after this update

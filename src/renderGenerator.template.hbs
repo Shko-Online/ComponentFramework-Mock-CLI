@@ -21,27 +21,28 @@ import ReactDOM from 'react-dom';
     import from '{{data.ComponentFolder}}/{{this}}';
 {{/each}}
 
-export type StoryArgs {
+export type StoryArgs = {
   isDisabled: boolean;
   isVisible: boolean;
 {{#each data.Inputs}}
-  {{this.name}}: {{ControlToType this}};
+  {{this.name}}: {{{ControlToType this}}};
 {{/each}}
-}
+};
 
 const renderGenerator = (
   onInitialize?: (
     mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>, 
-    container, 
+    container: HTMLDivElement, 
     args: StoryArgs, 
     updateArgs: (newArgs: Partial<StoryArgs>) => void
   ) => void, 
   onUpdate?: (
     mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>, 
-    container, 
+    container: HTMLDivElement, 
     args: StoryArgs, 
     updateArgs: (newArgs: Partial<StoryArgs>) => void
-  ) => void {
+  ) => void 
+) => {
   let container: HTMLDivElement | null;
   let mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>;
 
@@ -72,7 +73,7 @@ const renderGenerator = (
         {{/if}}
         {
           {{#each (GetOutputProperties data.Inputs)}}
-           {{this.name}}: '{{this.type}}'   
+           {{this.name}}: '{{this.type}}', 
           {{/each}}
         }
       );

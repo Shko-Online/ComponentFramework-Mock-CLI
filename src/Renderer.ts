@@ -41,15 +41,34 @@ export default class Renderer {
   private ControlToPropertyMock(control: IData["Inputs"][any]) {
     switch (control.type) {
       case "DateAndTime.DateOnly":
+      case "DateAndTime.DateAndTime":
         return "DateTimePropertyMock";
       case "Multiple":
-        return "StringPropertyMock";
       case "SingleLine.Text":
+      case "SingleLine.Email":
+      case "SingleLine.Phone":
+      case "SingleLine.TextArea":
+      case "SingleLine.Ticker":
+      case "SingleLine.URL":
         return "StringPropertyMock";
       case "TwoOptions":
         return "TwoOptionsPropertyMock";
       case "Enum":
         return "EnumPropertyMock";
+      case "Decimal":
+        return "DecimalNumberPropertyMock";
+      case "Lookup.Simple":
+        return "LookupPropertyMock";
+      case "Whole.None":
+        return "WholeNumberPropertyMock";
+      case "OptionSet":
+        return "OptionSetPropertyMock";
+      case "MultiSelectOptionSet":
+        return "MultiSelectOptionSetPropertyMock";
+      case "FP":
+        return "DecimalNumberPropertyMock";
+      case "Currency":
+        return "DecimalNumberPropertyMock";
       default:
         return "ERROR!" + control;
     }
@@ -58,14 +77,30 @@ export default class Renderer {
   private ControlToType(control: IData["Inputs"][any]) {
     switch (control.type) {
       case "DateAndTime.DateOnly":
+      case "DateAndTime.DateAndTime":
         return "Date";
       case "Multiple":
       case "SingleLine.Text":
+      case "SingleLine.Email":
+      case "SingleLine.Phone":
+      case "SingleLine.TextArea":
+      case "SingleLine.Ticker":
+      case "SingleLine.URL":
         return "string";
       case "TwoOptions":
         return "boolean";
       case "Enum":
-        return control.enumValues.map((v) => v.value).join(" | ");
+        return control.enumValues.map((v) => '"' + v.value + '"').join(" | ");
+      case "Lookup.Simple":
+        return "ComponentFramework.LookupValue";
+      case "Currency":
+      case "Decimal":
+      case "FP":
+      case "MultiSelectOptionSet":
+      case "Object":
+      case "OptionSet":
+
+      case "Whole.None":
       default:
         return "";
     }
