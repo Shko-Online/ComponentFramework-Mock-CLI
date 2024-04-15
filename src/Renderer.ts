@@ -12,9 +12,10 @@ export default class Renderer {
 
     private GetPropertyMocks(inputs: IData['Inputs']) {
         const propertyMocks: string[] = [];
-        Object.getOwnPropertyNames(inputs).forEach(p => {
-            if (!propertyMocks.some(pm => pm === inputs[p])) {
-                propertyMocks.push(this.ControlToPropertyMock(inputs[p]));
+        inputs.forEach(property => {
+            var mock = this.ControlToPropertyMock(property);
+            if (!propertyMocks.includes(mock)) {
+                propertyMocks.push(mock);
             }
         });
         return propertyMocks.join(', ');
@@ -25,7 +26,7 @@ export default class Renderer {
     }
 
     private ControlToPropertyMock(control: IData['Inputs'][any]) {
-        switch (control) {
+        switch (control.type) {
             case 'DateAndTime.DateOnly':
                 return 'DateTimePropertyMock';
             case 'Multiple':
@@ -34,13 +35,15 @@ export default class Renderer {
                 return 'StringPropertyMock';
             case 'TwoOptions':
                 return 'TwoOptionsPropertyMock';
+            case 'Enum':
+                return 'EnumPropertyMock';
             default:
-                return '';
+                return 'ERROR!'+control;
         }
     }
 
     private ControlToType(control: IData['Inputs'][any]) {
-        switch (control) {
+        switch (control.type) {
             case 'DateAndTime.DateOnly':
                 return 'Date';
             case 'Multiple':
@@ -48,6 +51,8 @@ export default class Renderer {
                 return 'string';
             case 'TwoOptions':
                 return 'boolean';
+            case 'Enum':
+                return control.enumValues.map(v=>v.value).join(" | ");
             default:
                 return '';
         }

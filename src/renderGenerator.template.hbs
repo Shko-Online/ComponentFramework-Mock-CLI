@@ -1,5 +1,6 @@
 /* 
     This file was generated with @shko.online/componentframework-mock-cli (pcf-sb)
+    Do not manually update this file as it gets overwritten by pcf-sb based on the Manifest configuration.
 */
 
 import type { Meta, StoryObj } from '@storybook/html';
@@ -20,20 +21,32 @@ import ReactDOM from 'react-dom';
     import from '{{data.ComponentFolder}}/{{this}}';
 {{/each}}
 
-export const StoryArgs {
+export type StoryArgs {
   isDisabled: boolean;
   isVisible: boolean;
 {{#each data.Inputs}}
-  {{@key}}: {{ControlToType this}}
+  {{this.name}}: {{ControlToType this}};
 {{/each}}
 }
 
-const renderGenerator = () => {
+const renderGenerator = (
+  onInitialize?: (
+    mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>, 
+    container, 
+    args: StoryArgs, 
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void, 
+  onUpdate?: (
+    mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>, 
+    container, 
+    args: StoryArgs, 
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void {
   let container: HTMLDivElement | null;
   let mockGenerator: {{data.MockGenerator}}<IInputs, IOutputs>;
 
   return function () {
-    const [args] = useArgs<StoryArgs>();
+    const [args, updateArgs] = useArgs<StoryArgs>();
     // Fires on unload story
     useEffect(
       () => () => {
@@ -50,18 +63,23 @@ const renderGenerator = () => {
         Component,
         {
           {{#each data.Inputs}}
-            {{@key}}: {{ControlToPropertyMock this}}            
+            {{this.name}}: {{ControlToPropertyMock this}}            
           {{/each}}
         },
+        {{#if (isVirtualComponent data.MockGenerator)}}
+        {{else}}
         container,
+        {{/if}}
       );
+
+      onInitialize?.(mockGenerator, container, args, updateArgs);
 
       // Initialize default state of the parameters
       mockGenerator.context.mode.isControlDisabled = args.isDisabled;
       mockGenerator.context.mode.isVisible = args.isVisible;
       mockGenerator.context._SetCanvasItems({
          {{#each data.Inputs}}
-            {{@key}}: args.{{@key}}            
+            {{this.name}}: args.{{this.name}},           
          {{/each}}
       });
 
@@ -71,12 +89,14 @@ const renderGenerator = () => {
 
     // Update view
     if (mockGenerator) {
+      onUpdate?.(mockGenerator, container, args, updateArgs);
+
       // Update the component's parameters based on storybook's arguments
       mockGenerator.context.mode.isVisible = args.isVisible;
       mockGenerator.context.mode.isControlDisabled = args.isDisabled;
       mockGenerator.UpdateValues({
          {{#each data.Inputs }}
-            {{@key}}: args.{{@key}}            
+            {{this.name}}: args.{{this.name}},       
          {{/each}}
       });
       

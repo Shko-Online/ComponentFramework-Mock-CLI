@@ -1,3 +1,20 @@
+export type IEnumValue = {
+    name: string;
+    value: string;
+}
+
+export type IProperty = {
+    defaultValue?: string;
+    name: string;
+    required?: boolean;
+    usage: 'input' | 'bound' | 'output'
+} & ({
+    type: 'DateAndTime.DateOnly' | 'Multiple' | 'SingleLine.Text' | 'TwoOptions'
+} | {
+    type: 'Enum',
+    enumValues: IEnumValue[]
+})
+
 export type IData = {
     /**
      * Class Name of the component
@@ -11,10 +28,13 @@ export type IData = {
      * Component index file relative to the ComponentFolder. Defined in ControlManifest.Input.xml in the resources node like: `<code path="index.ts" order="1" />`
      */
     ComponentIndex: string;
-    
-    Inputs: {
-        [key: string]: 'DateAndTime.DateOnly' | 'Enum' | 'Multiple' | 'SingleLine.Text' | 'TwoOptions'
-    };
+    /**
+     * List of inputs
+     */
+    Inputs: IProperty[];
+    /**
+     * Mock Generator type (Starndard | React)
+     */
     MockGenerator: 'ComponentFrameworkMockGenerator' | 'ComponentFrameworkMockGeneratorReact'
-    
+
 }

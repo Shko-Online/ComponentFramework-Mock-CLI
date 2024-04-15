@@ -3,6 +3,7 @@
 exports[`Renderer can load template 1`] = `
 "/* 
     This file was generated with @shko.online/componentframework-mock-cli (pcf-sb)
+    Do not manually update this file as it gets overwritten by pcf-sb based on the Manifest configuration.
 */
 
 import type { Meta, StoryObj } from '@storybook/html';
@@ -11,25 +12,52 @@ import type { IInputs, IOutputs } from '../Calendar/generated/ManifestTypes';
 
 import { useArgs, useEffect } from "@storybook/preview-api";
 
-import { ComponentFrameworkMockGeneratorReact, StringPropertyMock } from '@shko.online/componentframework-mock';
+import { ComponentFrameworkMockGeneratorReact, StringPropertyMock, DateTimePropertyMock, TwoOptionsPropertyMock, EnumPropertyMock } from '@shko.online/componentframework-mock';
 
 import { Calendar as Component } from '../Calendar/index';
  
 import ReactDOM from 'react-dom';
 
 
-export const StoryArgs {
+export type StoryArgs {
   isDisabled: boolean;
   isVisible: boolean;
-  Theme: string
+  Theme: string;
+  BackgroundColor: string;
+  Language: string;
+  AccessibilityLabel: string;
+  SelectedDateValue: Date;
+  MinDate: Date;
+  MaxDate: Date;
+  ShowGoToToday: boolean;
+  MonthPickerVisible: boolean;
+  DayPickerVisible: boolean;
+  HighlightSelectedMonth: boolean;
+  HighlightCurrentMonth: boolean;
+  ShowSixWeeksByDefault: boolean;
+  ShowWeekNumbers: boolean;
+  InputEvent: string;
+  FirstDayOfWeek: Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday;
 }
 
-const renderGenerator = () => {
+const renderGenerator = (
+  onInitialize?: (
+    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>, 
+    container, 
+    args: StoryArgs, 
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void, 
+  onUpdate?: (
+    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>, 
+    container, 
+    args: StoryArgs, 
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void {
   let container: HTMLDivElement | null;
   let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
 
   return function () {
-    const [args] = useArgs<StoryArgs>();
+    const [args, updateArgs] = useArgs<StoryArgs>();
     // Fires on unload story
     useEffect(
       () => () => {
@@ -46,15 +74,46 @@ const renderGenerator = () => {
         Component,
         {
             Theme: StringPropertyMock            
+            BackgroundColor: StringPropertyMock            
+            Language: StringPropertyMock            
+            AccessibilityLabel: StringPropertyMock            
+            SelectedDateValue: DateTimePropertyMock            
+            MinDate: DateTimePropertyMock            
+            MaxDate: DateTimePropertyMock            
+            ShowGoToToday: TwoOptionsPropertyMock            
+            MonthPickerVisible: TwoOptionsPropertyMock            
+            DayPickerVisible: TwoOptionsPropertyMock            
+            HighlightSelectedMonth: TwoOptionsPropertyMock            
+            HighlightCurrentMonth: TwoOptionsPropertyMock            
+            ShowSixWeeksByDefault: TwoOptionsPropertyMock            
+            ShowWeekNumbers: TwoOptionsPropertyMock            
+            InputEvent: StringPropertyMock            
+            FirstDayOfWeek: EnumPropertyMock            
         },
-        container,
       );
+
+      onInitialize?.(mockGenerator, container, args, updateArgs);
 
       // Initialize default state of the parameters
       mockGenerator.context.mode.isControlDisabled = args.isDisabled;
       mockGenerator.context.mode.isVisible = args.isVisible;
       mockGenerator.context._SetCanvasItems({
-            Theme: args.Theme            
+            Theme: args.Theme,           
+            BackgroundColor: args.BackgroundColor,           
+            Language: args.Language,           
+            AccessibilityLabel: args.AccessibilityLabel,           
+            SelectedDateValue: args.SelectedDateValue,           
+            MinDate: args.MinDate,           
+            MaxDate: args.MaxDate,           
+            ShowGoToToday: args.ShowGoToToday,           
+            MonthPickerVisible: args.MonthPickerVisible,           
+            DayPickerVisible: args.DayPickerVisible,           
+            HighlightSelectedMonth: args.HighlightSelectedMonth,           
+            HighlightCurrentMonth: args.HighlightCurrentMonth,           
+            ShowSixWeeksByDefault: args.ShowSixWeeksByDefault,           
+            ShowWeekNumbers: args.ShowWeekNumbers,           
+            InputEvent: args.InputEvent,           
+            FirstDayOfWeek: args.FirstDayOfWeek,           
       });
 
       // Execute the component's init method      
@@ -63,11 +122,28 @@ const renderGenerator = () => {
 
     // Update view
     if (mockGenerator) {
+      onUpdate?.(mockGenerator, container, args, updateArgs);
+
       // Update the component's parameters based on storybook's arguments
       mockGenerator.context.mode.isVisible = args.isVisible;
       mockGenerator.context.mode.isControlDisabled = args.isDisabled;
       mockGenerator.UpdateValues({
-            Theme: args.Theme            
+            Theme: args.Theme,       
+            BackgroundColor: args.BackgroundColor,       
+            Language: args.Language,       
+            AccessibilityLabel: args.AccessibilityLabel,       
+            SelectedDateValue: args.SelectedDateValue,       
+            MinDate: args.MinDate,       
+            MaxDate: args.MaxDate,       
+            ShowGoToToday: args.ShowGoToToday,       
+            MonthPickerVisible: args.MonthPickerVisible,       
+            DayPickerVisible: args.DayPickerVisible,       
+            HighlightSelectedMonth: args.HighlightSelectedMonth,       
+            HighlightCurrentMonth: args.HighlightCurrentMonth,       
+            ShowSixWeeksByDefault: args.ShowSixWeeksByDefault,       
+            ShowWeekNumbers: args.ShowWeekNumbers,       
+            InputEvent: args.InputEvent,       
+            FirstDayOfWeek: args.FirstDayOfWeek,       
       });
       
       // Execute the component's updateView method 
