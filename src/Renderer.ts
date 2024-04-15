@@ -1,6 +1,6 @@
-import { IData } from "ShkoOnline.types";
-import { readFile } from "fs/promises";
 import Handlebars from "handlebars";
+import { IData } from "./ShkoOnline.types";
+import { readFile } from "fs/promises";
 
 export default class Renderer {
   constructor() {
@@ -55,6 +55,7 @@ export default class Renderer {
         return "TwoOptionsPropertyMock";
       case "Enum":
         return "EnumPropertyMock";
+      case "Currency":
       case "Decimal":
         return "DecimalNumberPropertyMock";
       case "Lookup.Simple":
@@ -67,10 +68,8 @@ export default class Renderer {
         return "MultiSelectOptionSetPropertyMock";
       case "FP":
         return "DecimalNumberPropertyMock";
-      case "Currency":
-        return "DecimalNumberPropertyMock";
       default:
-        return "ERROR!" + control;
+        return "ERROR!" + control["type"];
     }
   }
 
@@ -96,13 +95,13 @@ export default class Renderer {
       case "Currency":
       case "Decimal":
       case "FP":
-      case "MultiSelectOptionSet":
-      case "Object":
-      case "OptionSet":
-
       case "Whole.None":
+      case "OptionSet":
+        return "number";
+      case "MultiSelectOptionSet":
+        return "number[]";
       default:
-        return "";
+        return "ERROR" + control["type"];
     }
   }
   private ControlToOutputTypes(control: IData["Inputs"][any]) {
@@ -134,19 +133,8 @@ export default class Renderer {
       case "TwoOptions":
         return "boolean";
       default:
-        return "ERROR!" + control;
+        return "ERROR!" + control["type"];
     }
-  }
-
-  async Render(data: IData) {
-    const buffer = await readFile(
-      require.resolve("./renderGenerator.template.hbs")
-    );
-    const template = Handlebars.compile(buffer.toString());
-
-    const dts = template({ data });
-
-    return dts;
   }
 
   private GetOutputProperties(inputs: IData["Inputs"]) {
@@ -161,5 +149,16 @@ export default class Renderer {
         };
       });
     return t;
+  }
+
+  async Render(data: IData) {
+    const buffer = await readFile(
+      require.resolve("./renderGenerator.template.hbs")
+    );
+    const template = Handlebars.compile(buffer.toString());
+
+    const dts = template({ data });
+
+    return dts;
   }
 }

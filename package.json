@@ -6,7 +6,7 @@
     "pcf-bin": "./lib/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "test": "jest"
   },
   "keywords": [

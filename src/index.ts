@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { ProgramOptions } from "ProgramOptions";
+import { ProgramOptions } from "./ProgramOptions";
 import { Option, program } from "commander";
 import { error, info } from "./tracing";
 

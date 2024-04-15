@@ -1,6 +1,6 @@
 import libxmljs, { XMLElement } from "libxmljs";
 import { info } from "./tracing";
-import { IData, IProperty } from "ShkoOnline.types";
+import { IData, IProperty } from "./ShkoOnline.types";
 
 export class ManifestParser {
   private VERBOSE: boolean;
