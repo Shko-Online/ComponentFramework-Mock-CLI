@@ -18,14 +18,20 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'test'
-  displayName: "Test"
+    customCommand: 'run build'
+  displayName: "Build"
 
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'run build'
-  displayName: "Build"
+    customCommand: 'test'
+  displayName: "Test"
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed() # because otherwise we won't know what tests failed
+  inputs:
+    testResultsFiles: 'coverage/junit.xml'
+  displayName: 'Publish npm test results to pipelines'
 
 - task: PublishCodeCoverageResults@2
   displayName: "Publish code coverage results"
