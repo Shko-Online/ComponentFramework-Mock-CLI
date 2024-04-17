@@ -18,7 +18,6 @@ import { Calendar as Component } from '../Calendar/index';
  
 import ReactDOM from 'react-dom';
 
-
 export type StoryArgs = {
   isDisabled: boolean;
   isVisible: boolean;
@@ -179,7 +178,6 @@ import { ComponentFrameworkMockGenerator, LookupPropertyMock, StringPropertyMock
 
 import { LookupDropdown as Component } from '../LookupDropdown/index';
  
-
 
 export type StoryArgs = {
   isDisabled: boolean;

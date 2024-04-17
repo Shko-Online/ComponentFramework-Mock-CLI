@@ -44,6 +44,7 @@ describe("Renderer", () => {
         },
       ],
       MockGenerator: "ComponentFrameworkMockGeneratorReact",
+      Styles: [],
     });
 
     expect(result).toMatchSnapshot();
@@ -80,6 +81,7 @@ describe("Renderer", () => {
         },
       ],
       MockGenerator: "ComponentFrameworkMockGenerator",
+      Styles: [],
     });
 
     expect(result).toMatchSnapshot();

@@ -16,10 +16,12 @@ import { {{data.Component}} as Component } from '{{data.ComponentFolder}}/{{data
 {{#if (isVirtualComponent data.MockGenerator)}}
 import ReactDOM from 'react-dom';
 {{/if}}
+{{#if data.Styles}}
 
 {{#each data.Styles}}
-    import from '{{data.ComponentFolder}}/{{this}}';
+import from '{{data.ComponentFolder}}/{{this}}';
 {{/each}}
+{{/if}}
 
 export type StoryArgs = {
   isDisabled: boolean;

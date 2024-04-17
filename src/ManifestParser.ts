@@ -49,6 +49,9 @@ export class ManifestParser {
           usage,
         };
       }),
+      Styles: xmlDoc.find("/manifest/control/resources/css").map((p) => {
+        return (p as XMLElement).getAttribute("path")?.value();
+      }),
     } as IData;
 
     return result;

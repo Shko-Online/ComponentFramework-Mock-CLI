@@ -60,4 +60,6 @@ export type IData = {
   MockGenerator:
     | "ComponentFrameworkMockGenerator"
     | "ComponentFrameworkMockGeneratorReact";
+
+  Styles: string[]
 };

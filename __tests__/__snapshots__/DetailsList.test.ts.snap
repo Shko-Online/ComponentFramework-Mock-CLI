@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailsList can generate renderGenerator 1`] = `
+"/* 
+    This file was generated with @shko.online/componentframework-mock-cli (pcf-sb)
+    Do not manually update this file as it gets overwritten by pcf-sb based on the Manifest configuration.
+*/
+
+import type { Meta, StoryObj } from '@storybook/html';
+
+import type { IInputs, IOutputs } from '/generated/ManifestTypes';
+
+import { useArgs, useEffect } from "@storybook/preview-api";
+
+import { ComponentFrameworkMockGeneratorReact, EnumPropertyMock, TwoOptionsPropertyMock, WholeNumberPropertyMock, StringPropertyMock } from '@shko.online/componentframework-mock';
+
+import { FluentDetailsList as Component } from '/index.ts';
+ 
+import ReactDOM from 'react-dom';
+
+import from '/css/DetailsList.css';
+
+export type StoryArgs = {
+  isDisabled: boolean;
+  isVisible: boolean;
+  SelectionType: "0" | "1" | "2";
+  SelectRowsOnFocus: boolean;
+  PageSize: number;
+  LargeDatasetPaging: boolean;
+  PageNumber: number;
+  HasNextPage: boolean;
+  HasPreviousPage: boolean;
+  TotalRecords: number;
+  TotalPages: number;
+  CurrentSortColumn: string;
+  CurrentSortDirection: "0" | "1";
+  AccessibilityLabel: string;
+  RaiseOnRowSelectionChangeEvent: boolean;
+  InputEvent: string;
+  EventName: string;
+  EventColumn: string;
+  EventRowKey: string;
+  SortEventColumn: string;
+  SortEventDirection: "0" | "1";
+  Theme: string;
+  Compact: boolean;
+  HeaderVisible: boolean;
+  AlternateRowColor: string;
+  SelectionAlwaysVisible: boolean;
+};
+
+const renderGenerator = (
+  onInitialize?: (
+    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void,
+  onUpdate?: (
+    mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>,
+    container: HTMLDivElement,
+    args: StoryArgs,
+    updateArgs: (newArgs: Partial<StoryArgs>) => void
+  ) => void
+) => {
+  let container: HTMLDivElement | null;
+  let mockGenerator: ComponentFrameworkMockGeneratorReact<IInputs, IOutputs>;
+
+  return function () {
+    const [args, updateArgs] = useArgs<StoryArgs>();
+    // Fires on unload story
+    useEffect(
+      () => () => {
+        container = null;
+        mockGenerator.control.destroy();
+      },
+      []
+    );
+    // init logic: 
+    if (!container) {
+      container = document.createElement('div');
+      // initialize ComponentFramework Mock Generator
+      mockGenerator = new ComponentFrameworkMockGeneratorReact(
+        Component,
+        {
+            SelectionType: EnumPropertyMock,            
+            SelectRowsOnFocus: TwoOptionsPropertyMock,            
+            PageSize: WholeNumberPropertyMock,            
+            LargeDatasetPaging: TwoOptionsPropertyMock,            
+            PageNumber: WholeNumberPropertyMock,            
+            HasNextPage: TwoOptionsPropertyMock,            
+            HasPreviousPage: TwoOptionsPropertyMock,            
+            TotalRecords: WholeNumberPropertyMock,            
+            TotalPages: WholeNumberPropertyMock,            
+            CurrentSortColumn: StringPropertyMock,            
+            CurrentSortDirection: EnumPropertyMock,            
+            AccessibilityLabel: StringPropertyMock,            
+            RaiseOnRowSelectionChangeEvent: TwoOptionsPropertyMock,            
+            InputEvent: StringPropertyMock,            
+            EventName: StringPropertyMock,            
+            EventColumn: StringPropertyMock,            
+            EventRowKey: StringPropertyMock,            
+            SortEventColumn: StringPropertyMock,            
+            SortEventDirection: EnumPropertyMock,            
+            Theme: StringPropertyMock,            
+            Compact: TwoOptionsPropertyMock,            
+            HeaderVisible: TwoOptionsPropertyMock,            
+            AlternateRowColor: StringPropertyMock,            
+            SelectionAlwaysVisible: TwoOptionsPropertyMock,            
+        },
+        {
+           PageNumber: 'number', 
+           HasNextPage: 'boolean', 
+           HasPreviousPage: 'boolean', 
+           TotalRecords: 'number', 
+           TotalPages: 'number', 
+           EventName: 'string', 
+           EventColumn: 'string', 
+           EventRowKey: 'string', 
+           SortEventColumn: 'string', 
+           SortEventDirection: 'ERROR!Enum', 
+        }
+      );
+
+      onInitialize?.(mockGenerator, container, args, updateArgs);
+
+      // Initialize default state of the parameters
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context._SetCanvasItems({
+            SelectionType: args.SelectionType,           
+            SelectRowsOnFocus: args.SelectRowsOnFocus,           
+            PageSize: args.PageSize,           
+            LargeDatasetPaging: args.LargeDatasetPaging,           
+            PageNumber: args.PageNumber,           
+            HasNextPage: args.HasNextPage,           
+            HasPreviousPage: args.HasPreviousPage,           
+            TotalRecords: args.TotalRecords,           
+            TotalPages: args.TotalPages,           
+            CurrentSortColumn: args.CurrentSortColumn,           
+            CurrentSortDirection: args.CurrentSortDirection,           
+            AccessibilityLabel: args.AccessibilityLabel,           
+            RaiseOnRowSelectionChangeEvent: args.RaiseOnRowSelectionChangeEvent,           
+            InputEvent: args.InputEvent,           
+            EventName: args.EventName,           
+            EventColumn: args.EventColumn,           
+            EventRowKey: args.EventRowKey,           
+            SortEventColumn: args.SortEventColumn,           
+            SortEventDirection: args.SortEventDirection,           
+            Theme: args.Theme,           
+            Compact: args.Compact,           
+            HeaderVisible: args.HeaderVisible,           
+            AlternateRowColor: args.AlternateRowColor,           
+            SelectionAlwaysVisible: args.SelectionAlwaysVisible,           
+      });
+
+      // Execute the component's init method      
+      mockGenerator.ExecuteInit();
+    }
+
+    // Update view
+    if (mockGenerator) {
+      onUpdate?.(mockGenerator, container, args, updateArgs);
+
+      // Update the component's parameters based on storybook's arguments
+      mockGenerator.context.mode.isVisible = args.isVisible;
+      mockGenerator.context.mode.isControlDisabled = args.isDisabled;
+      mockGenerator.UpdateValues({
+            SelectionType: args.SelectionType,       
+            SelectRowsOnFocus: args.SelectRowsOnFocus,       
+            PageSize: args.PageSize,       
+            LargeDatasetPaging: args.LargeDatasetPaging,       
+            PageNumber: args.PageNumber,       
+            HasNextPage: args.HasNextPage,       
+            HasPreviousPage: args.HasPreviousPage,       
+            TotalRecords: args.TotalRecords,       
+            TotalPages: args.TotalPages,       
+            CurrentSortColumn: args.CurrentSortColumn,       
+            CurrentSortDirection: args.CurrentSortDirection,       
+            AccessibilityLabel: args.AccessibilityLabel,       
+            RaiseOnRowSelectionChangeEvent: args.RaiseOnRowSelectionChangeEvent,       
+            InputEvent: args.InputEvent,       
+            EventName: args.EventName,       
+            EventColumn: args.EventColumn,       
+            EventRowKey: args.EventRowKey,       
+            SortEventColumn: args.SortEventColumn,       
+            SortEventDirection: args.SortEventDirection,       
+            Theme: args.Theme,       
+            Compact: args.Compact,       
+            HeaderVisible: args.HeaderVisible,       
+            AlternateRowColor: args.AlternateRowColor,       
+            SelectionAlwaysVisible: args.SelectionAlwaysVisible,       
+      });
+      
+      // Execute the component's updateView method 
+      ReactDOM.render(mockGenerator.ExecuteUpdateView(), container);     
+    }
+
+    // returning the rendered html component after this update
+    return container;
+  };
+};
+
+export default renderGenerator;
+"
+`;

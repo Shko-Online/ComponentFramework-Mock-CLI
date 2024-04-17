@@ -124,6 +124,7 @@ describe("ManifestParser", () => {
           ],
         },
       ],
+      Styles: ["css/Calendar.css"]
     });
   });
 });
