@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "description": "Command line interface for @shko.online/componentframework-mock",
   "bin": {
-    "pcf-bin": "./lib/index.js"
+    "pcf-sb": "./lib/index.js"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "npx tsc --project tsconfig.build.json && npm run hbs",
+    "hbs": "npx copyfiles ./src/**/*.hbs ./lib/ --up 1",
     "test": "jest --reporters=default --reporters=jest-junit"
   },
   "keywords": [
@@ -25,12 +26,13 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "copyfiles": "^2.4.1",
     "jest": "^29.7.0",
     "jest-junit": "^16.0.0",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2"
   },
-  "jest-junit":{
+  "jest-junit": {
     "suiteNameTemplate": "{filepath}",
     "outputDirectory": ".",
     "outputName": "coverage/junit.xml"

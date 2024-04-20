@@ -19,7 +19,7 @@ import ReactDOM from 'react-dom';
 {{#if data.Styles}}
 
 {{#each data.Styles}}
-import from '{{data.ComponentFolder}}/{{this}}';
+import '{{@root.data.ComponentFolder}}/{{this}}';
 {{/each}}
 {{/if}}
 

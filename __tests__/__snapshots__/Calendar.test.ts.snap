@@ -18,7 +18,7 @@ import { Calendar as Component } from '/index.ts';
  
 import ReactDOM from 'react-dom';
 
-import from '/css/Calendar.css';
+import '/css/Calendar.css';
 
 export type StoryArgs = {
   isDisabled: boolean;
